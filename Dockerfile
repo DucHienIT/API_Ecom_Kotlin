@@ -8,6 +8,10 @@ WORKDIR /app
 COPY . /app
 
 # install the required packages
+
+RUN set -o errexit
+
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # chạy lệnh runserver khi container được khởi chạy
