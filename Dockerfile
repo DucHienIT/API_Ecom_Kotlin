@@ -1,10 +1,14 @@
-FROM python:3.8-slim-buster
+# sử dụng image python:3.8.5-alpine
+FROM python:3.8.5-alpine
 
+# set the working directory to /app
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip3 install --no-cache-dir -r requirements.txt
+# copy the current directory contents into the container at /app
+COPY . /app
 
-COPY . .
+# install the required packages
+RUN pip install -r requirements.txt
 
-CMD ["gunicorn", "app:app", "--config", "gunicorn.conf.py"]
+# chạy lệnh runserver khi container được khởi chạy
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
